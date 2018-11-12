@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ff89a18efc941e1b9691e9ff5af1ea5" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.dostarcza" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Dostawcy" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Odbiorcy" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.potrzebny_do_produkcji" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Pracownicy" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Produkty" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Składniki" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Stan_zamówienia" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Stanowisko" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Wykonują" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Zadania" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Zamówienia" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.zawierają" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK__dostarcza__ID_do__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__dostarcza__ID_sk__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Zamówieni__ID_od__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__potrzebny__ID_pr__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__potrzebny__ID_sk__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Pracownic__ID_St__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Wykonują__ID_Pra__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Zadania__Produko__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__zawierają__ID_pr__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Zamówieni__ID_st__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Wykonują__ID_Zad__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__zawierają__ID_za__5165187F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

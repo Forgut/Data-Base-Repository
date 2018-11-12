@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dostarcza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ID_dostawcy" Type="int" Nullable="false" />
+          <Property Name="ID_składnika" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Odbiorcy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="potrzebny do produkcji">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ID_składnika" Type="int" Nullable="false" />
+          <Property Name="ID_produktu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pracownicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Adres" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_Stanowiska" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cena produkcji" Type="int" Nullable="false" />
+          <Property Name="Cena za szt." Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Składniki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cena" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stan zamówienia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stanowisko">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Płaca" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wykonują">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ID_Pracownika" Type="int" Nullable="false" />
+          <Property Name="ID_Zadania" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zadania">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="int" Nullable="false" />
+          <Property Name="Czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Faktyczny czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Produkowany produkt" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zamówienia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Data złożenia" Type="datetime" Nullable="false" />
+          <Property Name="Data odbioru" Type="datetime" Nullable="false" />
+          <Property Name="ID_stanu" Type="int" Nullable="false" />
+          <Property Name="ID_odbiorcy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zawierają">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ID_produktu" Type="int" Nullable="false" />
+          <Property Name="ID_zamówienia" Type="int" Nullable="false" />
+          <Property Name="Ilość" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__dostarcza__ID_do__47DBAE45">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="1" />
+          <End Role="dostarcza" Type="Self.dostarcza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="dostarcza">
+              <PropertyRef Name="ID_dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dostarcza__ID_sk__48CFD27E">
+          <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
+          <End Role="dostarcza" Type="Self.dostarcza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Składniki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="dostarcza">
+              <PropertyRef Name="ID_składnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__potrzebny__ID_pr__4AB81AF0">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
+          <End Role="potrzebny do produkcji" Type="Self.potrzebny do produkcji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="potrzebny do produkcji">
+              <PropertyRef Name="ID_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__potrzebny__ID_sk__49C3F6B7">
+          <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
+          <End Role="potrzebny do produkcji" Type="Self.potrzebny do produkcji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Składniki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="potrzebny do produkcji">
+              <PropertyRef Name="ID_składnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pracownic__ID_St__4BAC3F29">
+          <End Role="Stanowisko" Type="Self.Stanowisko" Multiplicity="1" />
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stanowisko">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pracownicy">
+              <PropertyRef Name="ID_Stanowiska" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wykonują__ID_Pra__5DCAEF64">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="1" />
+          <End Role="Wykonują" Type="Self.Wykonują" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wykonują">
+              <PropertyRef Name="ID_Pracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wykonują__ID_Zad__5CD6CB2B">
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="1" />
+          <End Role="Wykonują" Type="Self.Wykonują" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zadania">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wykonują">
+              <PropertyRef Name="ID_Zadania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zadania__Produko__4D94879B">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zadania">
+              <PropertyRef Name="Produkowany produkt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamówieni__ID_od__6FE99F9F">
+          <End Role="Odbiorcy" Type="Self.Odbiorcy" Multiplicity="1" />
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odbiorcy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zamówienia">
+              <PropertyRef Name="ID_odbiorcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamówieni__ID_st__4E88ABD4">
+          <End Role="Stan zamówienia" Type="Self.Stan zamówienia" Multiplicity="1" />
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stan zamówienia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zamówienia">
+              <PropertyRef Name="ID_stanu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__zawierają__ID_pr__5070F446">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
+          <End Role="zawierają" Type="Self.zawierają" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="zawierają">
+              <PropertyRef Name="ID_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__zawierają__ID_za__5165187F">
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="1" />
+          <End Role="zawierają" Type="Self.zawierają" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamówienia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="zawierają">
+              <PropertyRef Name="ID_zamówienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="dostarcza" EntityType="Self.dostarcza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dostawcy" EntityType="Self.Dostawcy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Odbiorcy" EntityType="Self.Odbiorcy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="potrzebny do produkcji" EntityType="Self.potrzebny do produkcji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Składniki" EntityType="Self.Składniki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stan zamówienia" EntityType="Self.Stan zamówienia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stanowisko" EntityType="Self.Stanowisko" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wykonują" EntityType="Self.Wykonują" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zadania" EntityType="Self.Zadania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zamówienia" EntityType="Self.Zamówienia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zawierają" EntityType="Self.zawierają" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__dostarcza__ID_do__47DBAE45" Association="Self.FK__dostarcza__ID_do__47DBAE45">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="dostarcza" EntitySet="dostarcza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dostarcza__ID_sk__48CFD27E" Association="Self.FK__dostarcza__ID_sk__48CFD27E">
+            <End Role="Składniki" EntitySet="Składniki" />
+            <End Role="dostarcza" EntitySet="dostarcza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__potrzebny__ID_pr__4AB81AF0" Association="Self.FK__potrzebny__ID_pr__4AB81AF0">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="potrzebny do produkcji" EntitySet="potrzebny do produkcji" />
+          </AssociationSet>
+          <AssociationSet Name="FK__potrzebny__ID_sk__49C3F6B7" Association="Self.FK__potrzebny__ID_sk__49C3F6B7">
+            <End Role="Składniki" EntitySet="Składniki" />
+            <End Role="potrzebny do produkcji" EntitySet="potrzebny do produkcji" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pracownic__ID_St__4BAC3F29" Association="Self.FK__Pracownic__ID_St__4BAC3F29">
+            <End Role="Stanowisko" EntitySet="Stanowisko" />
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wykonują__ID_Pra__5DCAEF64" Association="Self.FK__Wykonują__ID_Pra__5DCAEF64">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Wykonują" EntitySet="Wykonują" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wykonują__ID_Zad__5CD6CB2B" Association="Self.FK__Wykonują__ID_Zad__5CD6CB2B">
+            <End Role="Zadania" EntitySet="Zadania" />
+            <End Role="Wykonują" EntitySet="Wykonują" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zadania__Produko__4D94879B" Association="Self.FK__Zadania__Produko__4D94879B">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Zadania" EntitySet="Zadania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamówieni__ID_od__6FE99F9F" Association="Self.FK__Zamówieni__ID_od__6FE99F9F">
+            <End Role="Odbiorcy" EntitySet="Odbiorcy" />
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamówieni__ID_st__4E88ABD4" Association="Self.FK__Zamówieni__ID_st__4E88ABD4">
+            <End Role="Stan zamówienia" EntitySet="Stan zamówienia" />
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__zawierają__ID_pr__5070F446" Association="Self.FK__zawierają__ID_pr__5070F446">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="zawierają" EntitySet="zawierają" />
+          </AssociationSet>
+          <AssociationSet Name="FK__zawierają__ID_za__5165187F" Association="Self.FK__zawierają__ID_za__5165187F">
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+            <End Role="zawierają" EntitySet="zawierają" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dostarcza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ID_dostawcy" Type="Int32" Nullable="false" />
+          <Property Name="ID_składnika" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dostawcy" Relationship="Self.FK__dostarcza__ID_do__47DBAE45" FromRole="dostarcza" ToRole="Dostawcy" />
+          <NavigationProperty Name="Składniki" Relationship="Self.FK__dostarcza__ID_sk__48CFD27E" FromRole="dostarcza" ToRole="Składniki" />
+        </EntityType>
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="dostarcza" Relationship="Self.FK__dostarcza__ID_do__47DBAE45" FromRole="Dostawcy" ToRole="dostarcza" />
+        </EntityType>
+        <EntityType Name="Odbiorcy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Zamówienia" Relationship="Self.FK__Zamówieni__ID_od__6FE99F9F" FromRole="Odbiorcy" ToRole="Zamówienia" />
+        </EntityType>
+        <EntityType Name="potrzebny_do_produkcji">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ID_składnika" Type="Int32" Nullable="false" />
+          <Property Name="ID_produktu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__potrzebny__ID_pr__4AB81AF0" FromRole="potrzebny_do_produkcji" ToRole="Produkty" />
+          <NavigationProperty Name="Składniki" Relationship="Self.FK__potrzebny__ID_sk__49C3F6B7" FromRole="potrzebny_do_produkcji" ToRole="Składniki" />
+        </EntityType>
+        <EntityType Name="Pracownicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID_Stanowiska" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Stanowisko" Relationship="Self.FK__Pracownic__ID_St__4BAC3F29" FromRole="Pracownicy" ToRole="Stanowisko" />
+          <NavigationProperty Name="Wykonują" Relationship="Self.FK__Wykonują__ID_Pra__5DCAEF64" FromRole="Pracownicy" ToRole="Wykonują" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cena_produkcji" Type="Int32" Nullable="false" />
+          <Property Name="Cena_za_szt_" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="potrzebny_do_produkcji" Relationship="Self.FK__potrzebny__ID_pr__4AB81AF0" FromRole="Produkty" ToRole="potrzebny_do_produkcji" />
+          <NavigationProperty Name="Zadania" Relationship="Self.FK__Zadania__Produko__4D94879B" FromRole="Produkty" ToRole="Zadania" />
+          <NavigationProperty Name="zawierają" Relationship="Self.FK__zawierają__ID_pr__5070F446" FromRole="Produkty" ToRole="zawierają" />
+        </EntityType>
+        <EntityType Name="Składniki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dostarcza" Relationship="Self.FK__dostarcza__ID_sk__48CFD27E" FromRole="Składniki" ToRole="dostarcza" />
+          <NavigationProperty Name="potrzebny_do_produkcji" Relationship="Self.FK__potrzebny__ID_sk__49C3F6B7" FromRole="Składniki" ToRole="potrzebny_do_produkcji" />
+        </EntityType>
+        <EntityType Name="Stan_zamówienia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Zamówienia" Relationship="Self.FK__Zamówieni__ID_st__4E88ABD4" FromRole="Stan_zamówienia" ToRole="Zamówienia" />
+        </EntityType>
+        <EntityType Name="Stanowisko">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Płaca" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK__Pracownic__ID_St__4BAC3F29" FromRole="Stanowisko" ToRole="Pracownicy" />
+        </EntityType>
+        <EntityType Name="Wykonują">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ID_Pracownika" Type="Int32" Nullable="false" />
+          <Property Name="ID_Zadania" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK__Wykonują__ID_Pra__5DCAEF64" FromRole="Wykonują" ToRole="Pracownicy" />
+          <NavigationProperty Name="Zadania" Relationship="Self.FK__Wykonują__ID_Zad__5CD6CB2B" FromRole="Wykonują" ToRole="Zadania" />
+        </EntityType>
+        <EntityType Name="Zadania">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="Int32" Nullable="false" />
+          <Property Name="Czas_wykonania" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Faktyczny_czas_wykonania" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Produkowany_produkt" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__Zadania__Produko__4D94879B" FromRole="Zadania" ToRole="Produkty" />
+          <NavigationProperty Name="Wykonują" Relationship="Self.FK__Wykonują__ID_Zad__5CD6CB2B" FromRole="Zadania" ToRole="Wykonują" />
+        </EntityType>
+        <EntityType Name="Zamówienia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Data_złożenia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data_odbioru" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_stanu" Type="Int32" Nullable="false" />
+          <Property Name="ID_odbiorcy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Odbiorcy" Relationship="Self.FK__Zamówieni__ID_od__6FE99F9F" FromRole="Zamówienia" ToRole="Odbiorcy" />
+          <NavigationProperty Name="Stan_zamówienia" Relationship="Self.FK__Zamówieni__ID_st__4E88ABD4" FromRole="Zamówienia" ToRole="Stan_zamówienia" />
+          <NavigationProperty Name="zawierają" Relationship="Self.FK__zawierają__ID_za__5165187F" FromRole="Zamówienia" ToRole="zawierają" />
+        </EntityType>
+        <EntityType Name="zawierają">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ID_produktu" Type="Int32" Nullable="false" />
+          <Property Name="ID_zamówienia" Type="Int32" Nullable="false" />
+          <Property Name="Ilość" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__zawierają__ID_pr__5070F446" FromRole="zawierają" ToRole="Produkty" />
+          <NavigationProperty Name="Zamówienia" Relationship="Self.FK__zawierają__ID_za__5165187F" FromRole="zawierają" ToRole="Zamówienia" />
+        </EntityType>
+        <Association Name="FK__dostarcza__ID_do__47DBAE45">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="1" />
+          <End Role="dostarcza" Type="Self.dostarcza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="dostarcza">
+              <PropertyRef Name="ID_dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dostarcza__ID_sk__48CFD27E">
+          <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
+          <End Role="dostarcza" Type="Self.dostarcza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Składniki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="dostarcza">
+              <PropertyRef Name="ID_składnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamówieni__ID_od__6FE99F9F">
+          <End Role="Odbiorcy" Type="Self.Odbiorcy" Multiplicity="1" />
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Odbiorcy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zamówienia">
+              <PropertyRef Name="ID_odbiorcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__potrzebny__ID_pr__4AB81AF0">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
+          <End Role="potrzebny_do_produkcji" Type="Self.potrzebny_do_produkcji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="potrzebny_do_produkcji">
+              <PropertyRef Name="ID_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__potrzebny__ID_sk__49C3F6B7">
+          <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
+          <End Role="potrzebny_do_produkcji" Type="Self.potrzebny_do_produkcji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Składniki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="potrzebny_do_produkcji">
+              <PropertyRef Name="ID_składnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pracownic__ID_St__4BAC3F29">
+          <End Role="Stanowisko" Type="Self.Stanowisko" Multiplicity="1" />
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stanowisko">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pracownicy">
+              <PropertyRef Name="ID_Stanowiska" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wykonują__ID_Pra__5DCAEF64">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="1" />
+          <End Role="Wykonują" Type="Self.Wykonują" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wykonują">
+              <PropertyRef Name="ID_Pracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zadania__Produko__4D94879B">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zadania">
+              <PropertyRef Name="Produkowany_produkt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__zawierają__ID_pr__5070F446">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
+          <End Role="zawierają" Type="Self.zawierają" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="zawierają">
+              <PropertyRef Name="ID_produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamówieni__ID_st__4E88ABD4">
+          <End Role="Stan_zamówienia" Type="Self.Stan_zamówienia" Multiplicity="1" />
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stan_zamówienia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zamówienia">
+              <PropertyRef Name="ID_stanu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wykonują__ID_Zad__5CD6CB2B">
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="1" />
+          <End Role="Wykonują" Type="Self.Wykonują" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zadania">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wykonują">
+              <PropertyRef Name="ID_Zadania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__zawierają__ID_za__5165187F">
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="1" />
+          <End Role="zawierają" Type="Self.zawierają" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamówienia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="zawierają">
+              <PropertyRef Name="ID_zamówienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dostarcza" EntityType="Self.dostarcza" />
+          <EntitySet Name="Dostawcy" EntityType="Self.Dostawcy" />
+          <EntitySet Name="Odbiorcy" EntityType="Self.Odbiorcy" />
+          <EntitySet Name="potrzebny_do_produkcji" EntityType="Self.potrzebny_do_produkcji" />
+          <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" />
+          <EntitySet Name="Składniki" EntityType="Self.Składniki" />
+          <EntitySet Name="Stan_zamówienia" EntityType="Self.Stan_zamówienia" />
+          <EntitySet Name="Stanowisko" EntityType="Self.Stanowisko" />
+          <EntitySet Name="Wykonują" EntityType="Self.Wykonują" />
+          <EntitySet Name="Zadania" EntityType="Self.Zadania" />
+          <EntitySet Name="Zamówienia" EntityType="Self.Zamówienia" />
+          <EntitySet Name="zawierają" EntityType="Self.zawierają" />
+          <AssociationSet Name="FK__dostarcza__ID_do__47DBAE45" Association="Self.FK__dostarcza__ID_do__47DBAE45">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="dostarcza" EntitySet="dostarcza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dostarcza__ID_sk__48CFD27E" Association="Self.FK__dostarcza__ID_sk__48CFD27E">
+            <End Role="Składniki" EntitySet="Składniki" />
+            <End Role="dostarcza" EntitySet="dostarcza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamówieni__ID_od__6FE99F9F" Association="Self.FK__Zamówieni__ID_od__6FE99F9F">
+            <End Role="Odbiorcy" EntitySet="Odbiorcy" />
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__potrzebny__ID_pr__4AB81AF0" Association="Self.FK__potrzebny__ID_pr__4AB81AF0">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="potrzebny_do_produkcji" EntitySet="potrzebny_do_produkcji" />
+          </AssociationSet>
+          <AssociationSet Name="FK__potrzebny__ID_sk__49C3F6B7" Association="Self.FK__potrzebny__ID_sk__49C3F6B7">
+            <End Role="Składniki" EntitySet="Składniki" />
+            <End Role="potrzebny_do_produkcji" EntitySet="potrzebny_do_produkcji" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pracownic__ID_St__4BAC3F29" Association="Self.FK__Pracownic__ID_St__4BAC3F29">
+            <End Role="Stanowisko" EntitySet="Stanowisko" />
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wykonują__ID_Pra__5DCAEF64" Association="Self.FK__Wykonują__ID_Pra__5DCAEF64">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Wykonują" EntitySet="Wykonują" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zadania__Produko__4D94879B" Association="Self.FK__Zadania__Produko__4D94879B">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Zadania" EntitySet="Zadania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__zawierają__ID_pr__5070F446" Association="Self.FK__zawierają__ID_pr__5070F446">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="zawierają" EntitySet="zawierają" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamówieni__ID_st__4E88ABD4" Association="Self.FK__Zamówieni__ID_st__4E88ABD4">
+            <End Role="Stan_zamówienia" EntitySet="Stan_zamówienia" />
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wykonują__ID_Zad__5CD6CB2B" Association="Self.FK__Wykonują__ID_Zad__5CD6CB2B">
+            <End Role="Zadania" EntitySet="Zadania" />
+            <End Role="Wykonują" EntitySet="Wykonują" />
+          </AssociationSet>
+          <AssociationSet Name="FK__zawierają__ID_za__5165187F" Association="Self.FK__zawierają__ID_za__5165187F">
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+            <End Role="zawierają" EntitySet="zawierają" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="dostarcza">
+            <EntityTypeMapping TypeName="DatabaseModel.dostarcza">
+              <MappingFragment StoreEntitySet="dostarcza">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_dostawcy" ColumnName="ID_dostawcy" />
+                <ScalarProperty Name="ID_składnika" ColumnName="ID_składnika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dostawcy">
+            <EntityTypeMapping TypeName="DatabaseModel.Dostawcy">
+              <MappingFragment StoreEntitySet="Dostawcy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Odbiorcy">
+            <EntityTypeMapping TypeName="DatabaseModel.Odbiorcy">
+              <MappingFragment StoreEntitySet="Odbiorcy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="potrzebny_do_produkcji">
+            <EntityTypeMapping TypeName="DatabaseModel.potrzebny_do_produkcji">
+              <MappingFragment StoreEntitySet="potrzebny do produkcji">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_składnika" ColumnName="ID_składnika" />
+                <ScalarProperty Name="ID_produktu" ColumnName="ID_produktu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pracownicy">
+            <EntityTypeMapping TypeName="DatabaseModel.Pracownicy">
+              <MappingFragment StoreEntitySet="Pracownicy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="ID_Stanowiska" ColumnName="ID_Stanowiska" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkty">
+            <EntityTypeMapping TypeName="DatabaseModel.Produkty">
+              <MappingFragment StoreEntitySet="Produkty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Cena_produkcji" ColumnName="Cena produkcji" />
+                <ScalarProperty Name="Cena_za_szt_" ColumnName="Cena za szt." />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Składniki">
+            <EntityTypeMapping TypeName="DatabaseModel.Składniki">
+              <MappingFragment StoreEntitySet="Składniki">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stan_zamówienia">
+            <EntityTypeMapping TypeName="DatabaseModel.Stan_zamówienia">
+              <MappingFragment StoreEntitySet="Stan zamówienia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stanowisko">
+            <EntityTypeMapping TypeName="DatabaseModel.Stanowisko">
+              <MappingFragment StoreEntitySet="Stanowisko">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Płaca" ColumnName="Płaca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wykonują">
+            <EntityTypeMapping TypeName="DatabaseModel.Wykonują">
+              <MappingFragment StoreEntitySet="Wykonują">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Pracownika" ColumnName="ID_Pracownika" />
+                <ScalarProperty Name="ID_Zadania" ColumnName="ID_Zadania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zadania">
+            <EntityTypeMapping TypeName="DatabaseModel.Zadania">
+              <MappingFragment StoreEntitySet="Zadania">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Czas_wykonania" ColumnName="Czas wykonania" />
+                <ScalarProperty Name="Faktyczny_czas_wykonania" ColumnName="Faktyczny czas wykonania" />
+                <ScalarProperty Name="Produkowany_produkt" ColumnName="Produkowany produkt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zamówienia">
+            <EntityTypeMapping TypeName="DatabaseModel.Zamówienia">
+              <MappingFragment StoreEntitySet="Zamówienia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Data_złożenia" ColumnName="Data złożenia" />
+                <ScalarProperty Name="Data_odbioru" ColumnName="Data odbioru" />
+                <ScalarProperty Name="ID_stanu" ColumnName="ID_stanu" />
+                <ScalarProperty Name="ID_odbiorcy" ColumnName="ID_odbiorcy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zawierają">
+            <EntityTypeMapping TypeName="DatabaseModel.zawierają">
+              <MappingFragment StoreEntitySet="zawierają">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_produktu" ColumnName="ID_produktu" />
+                <ScalarProperty Name="ID_zamówienia" ColumnName="ID_zamówienia" />
+                <ScalarProperty Name="Ilość" ColumnName="Ilość" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
