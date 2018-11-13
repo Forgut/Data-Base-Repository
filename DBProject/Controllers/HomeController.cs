@@ -53,40 +53,38 @@ namespace DBProject.Controllers
 
         // POST: DataBase/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Models.Odbiorcy odbiorcaToEdit)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var originalOdbiorca = (from o in db.Odbiorcy
+                                    where o.Id == odbiorcaToEdit.Id
+                                    select o).First();
+
+            if (!ModelState.IsValid)
+                return View(originalOdbiorca);
+
+            db.Entry(originalOdbiorca).CurrentValues.SetValues(odbiorcaToEdit);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: DataBase/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var odbiorcaToDelete = db.Odbiorcy.Find(id);
+            return View(odbiorcaToDelete);
         }
 
         // POST: DataBase/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            Models.Odbiorcy originalOdbiorca = db.Odbiorcy.Find(id);
+            db.Odbiorcy.Remove(originalOdbiorca);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
