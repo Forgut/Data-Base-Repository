@@ -1,0 +1,59 @@
+﻿@model DBProject.Models.Produkty
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produkty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena_produkcji)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena_produkcji)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena_za_szt_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena_za_szt_)
+        </dd>
+        @if (Model.Zadania.Count > 0) { 
+            <dt>
+                Produkowany w zadaniach:
+            </dt>
+        <dd>
+            @foreach (var z in Model.Zadania)
+            {
+            <p>@Html.ActionLink(z.Nazwa, "../Zadania/Details", new { z.Id })</p>
+            }
+            </dd>
+        }
+        else
+        {
+            <dt>Aktualnie nie produkowany</dt>
+            <dd></dd>
+        }
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

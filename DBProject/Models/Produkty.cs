@@ -11,7 +11,8 @@ namespace DBProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Produkty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,16 @@ namespace DBProject.Models
             this.Zadania = new HashSet<Zadania>();
             this.zawierają = new HashSet<zawierają>();
         }
+
+        
     
         public int Id { get; set; }
+        [Required]
+        [StringLength(20, MinimumLength = 3)]
         public string Nazwa { get; set; }
+        [Range(0,int.MaxValue)]
         public int Cena_produkcji { get; set; }
+        [Range(0, int.MaxValue)]
         public int Cena_za_szt_ { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -11,7 +11,9 @@ namespace DBProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+    using System.Linq;
+
     public partial class Zadania
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +21,33 @@ namespace DBProject.Models
         {
             this.Wykonują = new HashSet<Wykonują>();
         }
-    
+
+        public IEnumerable<SelectListItem> ProduktyDoWykonania
+        {
+            get
+            {
+                DatabaseEntities db = new DatabaseEntities();
+                var help = (from p in db.Produkty
+                            select p).ToList();
+                var list = new List<SelectListItem>();
+                foreach (var p in help)
+                {
+                    list.Add(new SelectListItem()
+                    {
+                        Value = p.Id.ToString(),
+                        Text = p.Nazwa
+                    });
+                }
+                return list;
+            }
+        }
+
         public int Id { get; set; }
-        public int Nazwa { get; set; }
+        public string Nazwa { get; set; }
         public string Czas_wykonania { get; set; }
         public string Faktyczny_czas_wykonania { get; set; }
         public int Produkowany_produkt { get; set; }
-    
+
         public virtual Produkty Produkty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wykonują> Wykonują { get; set; }

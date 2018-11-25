@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="dostarcza">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_dostawcy" Type="int" Nullable="false" />
           <Property Name="ID_składnika" Type="int" Nullable="false" />
         </EntityType>
@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Adres" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -33,7 +33,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_składnika" Type="int" Nullable="false" />
           <Property Name="ID_produktu" Type="int" Nullable="false" />
         </EntityType>
@@ -41,7 +41,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Imie" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Nazwisko" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Adres" Type="nchar" MaxLength="10" Nullable="false" />
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cena produkcji" Type="int" Nullable="false" />
           <Property Name="Cena za szt." Type="int" Nullable="false" />
@@ -60,7 +60,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cena" Type="int" Nullable="false" />
         </EntityType>
@@ -68,14 +68,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Stanowisko">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Płaca" Type="int" Nullable="false" />
         </EntityType>
@@ -83,7 +83,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_Pracownika" Type="int" Nullable="false" />
           <Property Name="ID_Zadania" Type="int" Nullable="false" />
         </EntityType>
@@ -91,8 +91,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Nazwa" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Faktyczny czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Produkowany produkt" Type="int" Nullable="false" />
@@ -101,7 +101,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Data złożenia" Type="datetime" Nullable="false" />
           <Property Name="Data odbioru" Type="datetime" Nullable="false" />
           <Property Name="ID_stanu" Type="int" Nullable="false" />
@@ -111,7 +111,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_produktu" Type="int" Nullable="false" />
           <Property Name="ID_zamówienia" Type="int" Nullable="false" />
           <Property Name="Ilość" Type="int" Nullable="false" />
@@ -128,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__dostarcza__ID_sk__48CFD27E">
+        <Association Name="FK__dostarcza__ID_sk__3D2915A8">
           <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
           <End Role="dostarcza" Type="Self.dostarcza" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__potrzebny__ID_pr__4AB81AF0">
+        <Association Name="FK__potrzebny__ID_pr__2A164134">
           <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
           <End Role="potrzebny do produkcji" Type="Self.potrzebny do produkcji" Multiplicity="*" />
           <ReferentialConstraint>
@@ -152,7 +152,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__potrzebny__ID_sk__49C3F6B7">
+        <Association Name="FK__potrzebny__ID_sk__3C34F16F">
           <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
           <End Role="potrzebny do produkcji" Type="Self.potrzebny do produkcji" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Zadania__Produko__4D94879B">
+        <Association Name="FK__Zadania__Produko__29221CFB">
           <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
           <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Zamówieni__ID_od__6FE99F9F">
+        <Association Name="FK__Zamówieni__ID_od__1CBC4616">
           <End Role="Odbiorcy" Type="Self.Odbiorcy" Multiplicity="1" />
           <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Zamówieni__ID_st__4E88ABD4">
+        <Association Name="FK__Zamówieni__ID_st__1BC821DD">
           <End Role="Stan zamówienia" Type="Self.Stan zamówienia" Multiplicity="1" />
           <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -236,7 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__zawierają__ID_pr__5070F446">
+        <Association Name="FK__zawierają__ID_pr__2B0A656D">
           <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
           <End Role="zawierają" Type="Self.zawierają" Multiplicity="*" />
           <ReferentialConstraint>
@@ -248,7 +248,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__zawierają__ID_za__5165187F">
+        <Association Name="FK__zawierają__ID_za__1AD3FDA4">
           <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="1" />
           <End Role="zawierają" Type="Self.zawierają" Multiplicity="*" />
           <ReferentialConstraint>
@@ -278,15 +278,15 @@
             <End Role="Dostawcy" EntitySet="Dostawcy" />
             <End Role="dostarcza" EntitySet="dostarcza" />
           </AssociationSet>
-          <AssociationSet Name="FK__dostarcza__ID_sk__48CFD27E" Association="Self.FK__dostarcza__ID_sk__48CFD27E">
+          <AssociationSet Name="FK__dostarcza__ID_sk__3D2915A8" Association="Self.FK__dostarcza__ID_sk__3D2915A8">
             <End Role="Składniki" EntitySet="Składniki" />
             <End Role="dostarcza" EntitySet="dostarcza" />
           </AssociationSet>
-          <AssociationSet Name="FK__potrzebny__ID_pr__4AB81AF0" Association="Self.FK__potrzebny__ID_pr__4AB81AF0">
+          <AssociationSet Name="FK__potrzebny__ID_pr__2A164134" Association="Self.FK__potrzebny__ID_pr__2A164134">
             <End Role="Produkty" EntitySet="Produkty" />
             <End Role="potrzebny do produkcji" EntitySet="potrzebny do produkcji" />
           </AssociationSet>
-          <AssociationSet Name="FK__potrzebny__ID_sk__49C3F6B7" Association="Self.FK__potrzebny__ID_sk__49C3F6B7">
+          <AssociationSet Name="FK__potrzebny__ID_sk__3C34F16F" Association="Self.FK__potrzebny__ID_sk__3C34F16F">
             <End Role="Składniki" EntitySet="Składniki" />
             <End Role="potrzebny do produkcji" EntitySet="potrzebny do produkcji" />
           </AssociationSet>
@@ -302,29 +302,28 @@
             <End Role="Zadania" EntitySet="Zadania" />
             <End Role="Wykonują" EntitySet="Wykonują" />
           </AssociationSet>
-          <AssociationSet Name="FK__Zadania__Produko__4D94879B" Association="Self.FK__Zadania__Produko__4D94879B">
+          <AssociationSet Name="FK__Zadania__Produko__29221CFB" Association="Self.FK__Zadania__Produko__29221CFB">
             <End Role="Produkty" EntitySet="Produkty" />
             <End Role="Zadania" EntitySet="Zadania" />
           </AssociationSet>
-          <AssociationSet Name="FK__Zamówieni__ID_od__6FE99F9F" Association="Self.FK__Zamówieni__ID_od__6FE99F9F">
+          <AssociationSet Name="FK__Zamówieni__ID_od__1CBC4616" Association="Self.FK__Zamówieni__ID_od__1CBC4616">
             <End Role="Odbiorcy" EntitySet="Odbiorcy" />
             <End Role="Zamówienia" EntitySet="Zamówienia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Zamówieni__ID_st__4E88ABD4" Association="Self.FK__Zamówieni__ID_st__4E88ABD4">
+          <AssociationSet Name="FK__Zamówieni__ID_st__1BC821DD" Association="Self.FK__Zamówieni__ID_st__1BC821DD">
             <End Role="Stan zamówienia" EntitySet="Stan zamówienia" />
             <End Role="Zamówienia" EntitySet="Zamówienia" />
           </AssociationSet>
-          <AssociationSet Name="FK__zawierają__ID_pr__5070F446" Association="Self.FK__zawierają__ID_pr__5070F446">
+          <AssociationSet Name="FK__zawierają__ID_pr__2B0A656D" Association="Self.FK__zawierają__ID_pr__2B0A656D">
             <End Role="Produkty" EntitySet="Produkty" />
             <End Role="zawierają" EntitySet="zawierają" />
           </AssociationSet>
-          <AssociationSet Name="FK__zawierają__ID_za__5165187F" Association="Self.FK__zawierają__ID_za__5165187F">
+          <AssociationSet Name="FK__zawierają__ID_za__1AD3FDA4" Association="Self.FK__zawierają__ID_za__1AD3FDA4">
             <End Role="Zamówienia" EntitySet="Zamówienia" />
             <End Role="zawierają" EntitySet="zawierają" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -332,7 +331,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_dostawcy" Type="Int32" Nullable="false" />
           <Property Name="ID_składnika" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dostawcy" Relationship="Self.FK__dostarcza__ID_do__47DBAE45" FromRole="dostarcza" ToRole="Dostawcy" />
@@ -342,7 +341,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="dostarcza" Relationship="Self.FK__dostarcza__ID_do__47DBAE45" FromRole="Dostawcy" ToRole="dostarcza" />
@@ -360,7 +359,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_składnika" Type="Int32" Nullable="false" />
           <Property Name="ID_produktu" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Produkty" Relationship="Self.FK__potrzebny__ID_pr__4AB81AF0" FromRole="potrzebny_do_produkcji" ToRole="Produkty" />
@@ -370,7 +369,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nazwisko" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Adres" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
@@ -382,7 +381,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Cena_produkcji" Type="Int32" Nullable="false" />
           <Property Name="Cena_za_szt_" Type="Int32" Nullable="false" />
@@ -394,7 +393,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Cena" Type="Int32" Nullable="false" />
           <NavigationProperty Name="dostarcza" Relationship="Self.FK__dostarcza__ID_sk__48CFD27E" FromRole="Składniki" ToRole="dostarcza" />
@@ -404,7 +403,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Zamówienia" Relationship="Self.FK__Zamówieni__ID_st__4E88ABD4" FromRole="Stan_zamówienia" ToRole="Zamówienia" />
         </EntityType>
@@ -412,7 +411,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Płaca" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK__Pracownic__ID_St__4BAC3F29" FromRole="Stanowisko" ToRole="Pracownicy" />
@@ -421,7 +420,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Pracownika" Type="Int32" Nullable="false" />
           <Property Name="ID_Zadania" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pracownicy" Relationship="Self.FK__Wykonują__ID_Pra__5DCAEF64" FromRole="Wykonują" ToRole="Pracownicy" />
@@ -431,8 +430,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nazwa" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Czas_wykonania" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Faktyczny_czas_wykonania" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Produkowany_produkt" Type="Int32" Nullable="false" />
@@ -443,7 +442,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Data_złożenia" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Data_odbioru" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ID_stanu" Type="Int32" Nullable="false" />
@@ -456,7 +455,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_produktu" Type="Int32" Nullable="false" />
           <Property Name="ID_zamówienia" Type="Int32" Nullable="false" />
           <Property Name="Ilość" Type="Int32" Nullable="false" />

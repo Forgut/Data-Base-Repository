@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DBProject.Models.Zadania>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Czas_wykonania)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Faktyczny_czas_wykonania)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produkty.Nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Czas_wykonania)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faktyczny_czas_wykonania)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Produkty.Nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

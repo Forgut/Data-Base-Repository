@@ -1,0 +1,50 @@
+﻿@model DBProject.Models.Zamówienia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Zamówienia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_złożenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_złożenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_odbioru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_odbioru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Odbiorcy.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Odbiorcy.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stan_zamówienia.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stan_zamówienia.Nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
