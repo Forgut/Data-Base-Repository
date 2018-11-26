@@ -11,12 +11,55 @@ namespace DBProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using System.Web.Mvc;
+
     public partial class potrzebny_do_produkcji
     {
         public int Id { get; set; }
         public int ID_składnika { get; set; }
         public int ID_produktu { get; set; }
+        public string NazwaSkładnika
+        {
+            get
+            {
+                Models.DatabaseEntities db = new DatabaseEntities();
+                var składnik = (from s in db.Składniki
+                                where ID_składnika == s.Id
+                                select s).First();
+                return składnik.Nazwa;
+            }
+        }
+        public string NazwaProduktu
+        {
+            get
+            {
+                Models.DatabaseEntities db = new DatabaseEntities();
+                var produkt = (from p in db.Produkty
+                               where ID_produktu == p.Id
+                               select p).First();
+                return produkt.Nazwa;
+            }
+        }
+        public List<SelectListItem> DostępneSkładniki
+        {
+            get
+            {
+                Models.DatabaseEntities db = new DatabaseEntities();
+                var list = (from s in db.Składniki
+                            select s).ToList();
+                var output = new List<SelectListItem>();
+                foreach(var s in list)
+                {
+                    output.Add(new SelectListItem()
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Nazwa
+                    });
+                }
+                return output;
+            }
+        }
     
         public virtual Produkty Produkty { get; set; }
         public virtual Składniki Składniki { get; set; }

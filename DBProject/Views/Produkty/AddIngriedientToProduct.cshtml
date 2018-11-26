@@ -1,0 +1,32 @@
+﻿@model DBProject.Models.potrzebny_do_produkcji
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>potrzebny_do_produkcji</h4>
+        <dt>Dodaj składnik do produktu @Model.NazwaProduktu</dt>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_składnika, "ID_składnika", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model=> model.ID_składnika, Model.DostępneSkładniki, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_składnika, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.ID_produktu)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

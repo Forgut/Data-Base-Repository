@@ -1,0 +1,1 @@
+﻿insert into [potrzebny do produkcji] (ID_produktu, ID_składnika) values (5,1)

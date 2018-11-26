@@ -94,5 +94,30 @@ namespace DBProject.Controllers
             db.SaveChanges();
             return RedirectToAction("index");
         }
+
+        public  ActionResult AddIngriedientToProduct(int id)
+        {
+            return View(new Models.potrzebny_do_produkcji() { ID_produktu = id});
+        }
+
+        [HttpPost]
+        public ActionResult AddIngriedientToProduct(Models.potrzebny_do_produkcji potrzebny)
+        {
+            if (!ModelState.IsValid)
+                return View(potrzebny);
+
+            db.potrzebny_do_produkcji.Add(potrzebny);
+            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                ViewBag.Exception = e.InnerException.InnerException.Message;
+            }
+
+            return RedirectToAction("index");
+        }
     }
 }

@@ -49,6 +49,23 @@
             <dt>Aktualnie nie produkowany</dt>
             <dd></dd>
         }
+        @if (Model.potrzebny_do_produkcji.Count >0)
+        {
+            <dt>Składniki: </dt>
+            <dd>
+            @foreach (var pdp in Model.potrzebny_do_produkcji)
+            {
+                <p>@Html.ActionLink(pdp.NazwaSkładnika, "../Składniki/Details", new { id = pdp.ID_składnika })</p>
+            }
+            </dd>
+
+        }
+        else
+        {
+            <dt>Brak informacji o składnikach.</dt>
+            <dd></dd>
+        }
+        @Html.ActionLink("Dodaj składnik", "../Produkty/AddIngriedientToProduct", new { id = Model.Id })
 
 
     </dl>

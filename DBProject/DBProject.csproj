@@ -306,6 +306,7 @@
     <Content Include="Views\Zadania\Details.cshtml" />
     <Content Include="Views\Zadania\Create.cshtml" />
     <Content Include="Views\Zadania\Edit.cshtml" />
+    <Content Include="Views\Produkty\AddIngriedientToProduct.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
