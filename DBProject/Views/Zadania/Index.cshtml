@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<DBProject.Models.Zadania>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Zadania";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nowe", "Create")
 </p>
 <table class="table">
     <tr>
@@ -28,6 +28,8 @@
 
 @foreach (var item in Model) {
     <tr>
+        @if (!item.Zakończone)
+        {
         <td>
             @Html.DisplayFor(modelItem => item.Nazwa)
         </td>
@@ -41,10 +43,11 @@
             @Html.DisplayFor(modelItem => item.Produkty.Nazwa)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
         </td>
+        }
     </tr>
 }
 

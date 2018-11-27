@@ -27,7 +27,11 @@ namespace DBProject.Controllers
         // GET: Zamowienia/Create
         public ActionResult Create()
         {
-            return View(new Models.Zamówienia());
+            return View(new Models.Zamówienia()
+            {
+                Data_odbioru = new DateTime(),
+                Data_złożenia = new DateTime()
+            });
         }
 
         // POST: Zamowienia/Create
@@ -38,7 +42,15 @@ namespace DBProject.Controllers
                 return View();
 
             db.Zamówienia.Add(zamowienieToAdd);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                ViewBag.Exception = e.InnerException.InnerException.Message;
+                return View(zamowienieToAdd);
+            }
             return RedirectToAction("Index");
         }
 

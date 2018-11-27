@@ -27,7 +27,11 @@ namespace DBProject.Controllers
         // GET: Zadania/Create
         public ActionResult Create()
         {
-            return View(new Models.Zadania());
+            return View(new Models.Zadania()
+            {
+                Faktyczny_czas_wykonania = 0,
+                Produkowany_produkt = 0
+            });
         }
 
         // POST: Zadania/Create
@@ -37,8 +41,18 @@ namespace DBProject.Controllers
             if (!ModelState.IsValid)
                 return View();
 
+            if (zadanieToAdd.Faktyczny_czas_wykonania == 0)
+                zadanieToAdd.Faktyczny_czas_wykonania = zadanieToAdd.Czas_wykonania;
             db.Zadania.Add(zadanieToAdd);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                ViewBag.Exception = "Dane zadania są niepoprawne";
+                return View(zadanieToAdd);
+            }
 
             return RedirectToAction("index");
         }

@@ -44,9 +44,11 @@ namespace DBProject.Models
 
         public int Id { get; set; }
         public string Nazwa { get; set; }
-        public string Czas_wykonania { get; set; }
-        public string Faktyczny_czas_wykonania { get; set; }
+        public int Czas_wykonania { get; set; }
+        public int Faktyczny_czas_wykonania { get; set; }
         public int Produkowany_produkt { get; set; }
+        public bool Zakończone { get; set; }
+        public int Wykonanych_sztuk_produktu { get; set; }
 
         public virtual Produkty Produkty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

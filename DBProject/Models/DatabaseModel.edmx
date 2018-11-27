@@ -94,17 +94,19 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Faktyczny czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Czas wykonania" Type="int" Nullable="false" />
+          <Property Name="Faktyczny czas wykonania" Type="int" Nullable="false" />
           <Property Name="Produkowany produkt" Type="int" Nullable="false" />
+          <Property Name="Zakończone" Type="bit" Nullable="false" />
+          <Property Name="Wykonanych sztuk produktu" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Zamówienia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Data złożenia" Type="datetime" Nullable="false" />
-          <Property Name="Data odbioru" Type="datetime" Nullable="false" />
+          <Property Name="Data złożenia" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Data odbioru" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
           <Property Name="ID_stanu" Type="int" Nullable="false" />
           <Property Name="ID_odbiorcy" Type="int" Nullable="false" />
         </EntityType>
@@ -434,19 +436,21 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Czas_wykonania" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Faktyczny_czas_wykonania" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Czas_wykonania" Type="Int32" Nullable="false" />
+          <Property Name="Faktyczny_czas_wykonania" Type="Int32" Nullable="false" />
           <Property Name="Produkowany_produkt" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Produkty" Relationship="Self.FK__Zadania__Produko__4D94879B" FromRole="Zadania" ToRole="Produkty" />
           <NavigationProperty Name="Wykonują" Relationship="Self.FK__Wykonują__ID_Zad__5CD6CB2B" FromRole="Zadania" ToRole="Wykonują" />
+          <Property Name="Zakończone" Type="Boolean" Nullable="false" />
+          <Property Name="Wykonanych_sztuk_produktu" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Zamówienia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Data_złożenia" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Data_odbioru" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data_złożenia" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Data_odbioru" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="ID_stanu" Type="Int32" Nullable="false" />
           <Property Name="ID_odbiorcy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Odbiorcy" Relationship="Self.FK__Zamówieni__ID_od__6FE99F9F" FromRole="Zamówienia" ToRole="Odbiorcy" />
@@ -772,6 +776,8 @@
           <EntitySetMapping Name="Zadania">
             <EntityTypeMapping TypeName="DatabaseModel.Zadania">
               <MappingFragment StoreEntitySet="Zadania">
+                <ScalarProperty Name="Wykonanych_sztuk_produktu" ColumnName="Wykonanych sztuk produktu" />
+                <ScalarProperty Name="Zakończone" ColumnName="Zakończone" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
                 <ScalarProperty Name="Czas_wykonania" ColumnName="Czas wykonania" />

@@ -11,7 +11,10 @@ namespace DBProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+    using System.Linq;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Zamówienia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +22,30 @@ namespace DBProject.Models
         {
             this.zawierają = new HashSet<zawierają>();
         }
+
+        public List<SelectListItem> OdbiorcyList
+        {
+            get
+            {
+                Models.DatabaseEntities db = new DatabaseEntities();
+                var list = (from o in db.Odbiorcy
+                            select o).ToList();
+                var output = new List<SelectListItem>();
+                foreach (var o in list)
+                    output.Add(new SelectListItem()
+                    {
+                        Value = o.Id.ToString(),
+                        Text = o.Nazwa
+                    });
+                return output;
+                
+            }
+        }
     
         public int Id { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime Data_złożenia { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime Data_odbioru { get; set; }
         public int ID_stanu { get; set; }
         public int ID_odbiorcy { get; set; }
