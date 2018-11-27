@@ -115,6 +115,7 @@ namespace DBProject.Controllers
             catch(Exception e)
             {
                 ViewBag.Exception = e.InnerException.InnerException.Message;
+                return View(potrzebny);
             }
 
             return RedirectToAction("index");
