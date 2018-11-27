@@ -31,9 +31,9 @@
         </EntityType>
         <EntityType Name="potrzebny do produkcji">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_składnika" />
+            <PropertyRef Name="ID_produktu" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_składnika" Type="int" Nullable="false" />
           <Property Name="ID_produktu" Type="int" Nullable="false" />
         </EntityType>
@@ -55,6 +55,7 @@
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cena produkcji" Type="int" Nullable="false" />
           <Property Name="Cena za szt." Type="int" Nullable="false" />
+          <Property Name="Ilość na stanie" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Składniki">
           <Key>
@@ -91,7 +92,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Faktyczny czas wykonania" Type="varchar" MaxLength="50" Nullable="false" />
@@ -140,7 +141,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__potrzebny__ID_pr__2A164134">
+        <Association Name="FK__potrzebny__ID_pr__1209AD79">
           <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
           <End Role="potrzebny do produkcji" Type="Self.potrzebny do produkcji" Multiplicity="*" />
           <ReferentialConstraint>
@@ -152,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__potrzebny__ID_sk__3C34F16F">
+        <Association Name="FK__potrzebny__ID_sk__12FDD1B2">
           <End Role="Składniki" Type="Self.Składniki" Multiplicity="1" />
           <End Role="potrzebny do produkcji" Type="Self.potrzebny do produkcji" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,7 +189,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Wykonują__ID_Zad__5CD6CB2B">
+        <Association Name="FK__Wykonują__ID_Zad__4F47C5E3">
           <End Role="Zadania" Type="Self.Zadania" Multiplicity="1" />
           <End Role="Wykonują" Type="Self.Wykonują" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Zadania__Produko__29221CFB">
+        <Association Name="FK__Zadania__Produko__503BEA1C">
           <End Role="Produkty" Type="Self.Produkty" Multiplicity="1" />
           <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,11 +283,11 @@
             <End Role="Składniki" EntitySet="Składniki" />
             <End Role="dostarcza" EntitySet="dostarcza" />
           </AssociationSet>
-          <AssociationSet Name="FK__potrzebny__ID_pr__2A164134" Association="Self.FK__potrzebny__ID_pr__2A164134">
+          <AssociationSet Name="FK__potrzebny__ID_pr__1209AD79" Association="Self.FK__potrzebny__ID_pr__1209AD79">
             <End Role="Produkty" EntitySet="Produkty" />
             <End Role="potrzebny do produkcji" EntitySet="potrzebny do produkcji" />
           </AssociationSet>
-          <AssociationSet Name="FK__potrzebny__ID_sk__3C34F16F" Association="Self.FK__potrzebny__ID_sk__3C34F16F">
+          <AssociationSet Name="FK__potrzebny__ID_sk__12FDD1B2" Association="Self.FK__potrzebny__ID_sk__12FDD1B2">
             <End Role="Składniki" EntitySet="Składniki" />
             <End Role="potrzebny do produkcji" EntitySet="potrzebny do produkcji" />
           </AssociationSet>
@@ -298,11 +299,11 @@
             <End Role="Pracownicy" EntitySet="Pracownicy" />
             <End Role="Wykonują" EntitySet="Wykonują" />
           </AssociationSet>
-          <AssociationSet Name="FK__Wykonują__ID_Zad__5CD6CB2B" Association="Self.FK__Wykonują__ID_Zad__5CD6CB2B">
+          <AssociationSet Name="FK__Wykonują__ID_Zad__4F47C5E3" Association="Self.FK__Wykonują__ID_Zad__4F47C5E3">
             <End Role="Zadania" EntitySet="Zadania" />
             <End Role="Wykonują" EntitySet="Wykonują" />
           </AssociationSet>
-          <AssociationSet Name="FK__Zadania__Produko__29221CFB" Association="Self.FK__Zadania__Produko__29221CFB">
+          <AssociationSet Name="FK__Zadania__Produko__503BEA1C" Association="Self.FK__Zadania__Produko__503BEA1C">
             <End Role="Produkty" EntitySet="Produkty" />
             <End Role="Zadania" EntitySet="Zadania" />
           </AssociationSet>
@@ -357,9 +358,9 @@
         </EntityType>
         <EntityType Name="potrzebny_do_produkcji">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_produktu" />
+            <PropertyRef Name="ID_składnika" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_składnika" Type="Int32" Nullable="false" />
           <Property Name="ID_produktu" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Produkty" Relationship="Self.FK__potrzebny__ID_pr__4AB81AF0" FromRole="potrzebny_do_produkcji" ToRole="Produkty" />
@@ -388,6 +389,7 @@
           <NavigationProperty Name="potrzebny_do_produkcji" Relationship="Self.FK__potrzebny__ID_pr__4AB81AF0" FromRole="Produkty" ToRole="potrzebny_do_produkcji" />
           <NavigationProperty Name="Zadania" Relationship="Self.FK__Zadania__Produko__4D94879B" FromRole="Produkty" ToRole="Zadania" />
           <NavigationProperty Name="zawierają" Relationship="Self.FK__zawierają__ID_pr__5070F446" FromRole="Produkty" ToRole="zawierają" />
+          <Property Name="Ilość_na_stanie" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Składniki">
           <Key>
@@ -705,7 +707,6 @@
           <EntitySetMapping Name="potrzebny_do_produkcji">
             <EntityTypeMapping TypeName="DatabaseModel.potrzebny_do_produkcji">
               <MappingFragment StoreEntitySet="potrzebny do produkcji">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ID_składnika" ColumnName="ID_składnika" />
                 <ScalarProperty Name="ID_produktu" ColumnName="ID_produktu" />
               </MappingFragment>
@@ -725,6 +726,7 @@
           <EntitySetMapping Name="Produkty">
             <EntityTypeMapping TypeName="DatabaseModel.Produkty">
               <MappingFragment StoreEntitySet="Produkty">
+                <ScalarProperty Name="Ilość_na_stanie" ColumnName="Ilość na stanie" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
                 <ScalarProperty Name="Cena_produkcji" ColumnName="Cena produkcji" />

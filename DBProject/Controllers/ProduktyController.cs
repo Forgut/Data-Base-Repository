@@ -107,7 +107,6 @@ namespace DBProject.Controllers
                 return View(potrzebny);
 
             db.potrzebny_do_produkcji.Add(potrzebny);
-            db.SaveChanges();
             try
             {
                 db.SaveChanges();

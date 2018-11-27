@@ -33,6 +33,7 @@ namespace DBProject.Models
         public int Cena_produkcji { get; set; }
         [Range(0, int.MaxValue)]
         public int Cena_za_szt_ { get; set; }
+        public int Ilość_na_stanie { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<potrzebny_do_produkcji> potrzebny_do_produkcji { get; set; }
